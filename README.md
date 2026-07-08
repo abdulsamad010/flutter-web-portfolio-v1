@@ -4,25 +4,42 @@
 
 ### Abdul Samad's Personal Developer Portfolio
 
-A modern, responsive, and extensively redesigned personal portfolio website built with **Flutter Web**.
-
-Showcasing my **projects, technical skills, certifications, achievements, professional profile, and software development journey** through a modern and responsive web experience.
+A modern, responsive, and customized personal developer portfolio built with **Flutter Web** to showcase my projects, technical skills, certifications, achievements, and software development journey.
 
 <br>
 
 ![Flutter](https://img.shields.io/badge/Flutter-Web-02569B?logo=flutter)
 ![Dart](https://img.shields.io/badge/Dart-Programming-0175C2?logo=dart)
 ![Responsive](https://img.shields.io/badge/Design-Responsive-success)
-![GitHub](https://img.shields.io/badge/Version_Control-GitHub-181717?logo=github)
+![GitHub Pages](https://img.shields.io/badge/Deployment-GitHub_Pages-222222?logo=github)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 <br>
 
-[LinkedIn](https://www.linkedin.com/in/abdulsamad010/) •
-[GitHub](https://github.com/abdulsamad010) •
-[Email](mailto:abdulsamadabbasi010@gmail.com)
+<p align="center">
+  <a href="https://abdulsamad010.github.io/flutter-web-portfolio-v1/">
+    <img src="https://img.shields.io/badge/View_Live_Portfolio-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="View Live Portfolio">
+  </a>
+  <a href="https://www.linkedin.com/in/abdulsamad010/">
+    <img src="https://img.shields.io/badge/Connect_on_LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="Connect on LinkedIn">
+  </a>
+</p>
 
 </div>
+
+---
+
+## 🖥️ Portfolio Preview
+
+<div align="center">
+
+[![Portfolio Preview](assets/README/portfolio-preview.PNG)](https://abdulsamad010.github.io/flutter-web-portfolio-v1/)
+
+</div>
+
+<p align="center">
+  <em>Click the preview image to explore the live portfolio.</em>
+</p>
 
 ---
 
@@ -30,123 +47,73 @@ Showcasing my **projects, technical skills, certifications, achievements, profes
 
 **Flutter Web Portfolio V1** is my personal developer portfolio created to professionally present my technical background, software development projects, skills, certifications, achievements, professional profiles, and contact information.
 
-The project initially started from an open-source Flutter portfolio template.
+The project initially started from an open-source Flutter portfolio template that served as the development foundation.
 
-However, the original template was used only as the starting foundation.
+The original implementation was substantially redesigned, customized, restructured, and improved to create a more modern, responsive, personalized, and professional portfolio experience.
 
-I spent several days redesigning, restructuring, customizing, testing, and improving the project to transform the original implementation into a more **modern, responsive, organized, personalized, and professional Flutter Web portfolio**.
+My contributions include improvements to the user interface, responsive behavior, layouts, navigation, portfolio sections, project presentation, reusable components, assets, personal branding, content organization, and overall user experience.
 
-The current version includes significant improvements to the original interface, responsive behavior, layouts, navigation, portfolio sections, content organization, reusable components, personal branding, and overall user experience.
-
-The objective was not simply to replace the original content.
-
-The goal was to take the existing foundation and develop an improved portfolio experience that better represents my own technical background, projects, professional information, and software development work.
-
-> 🚧 The live deployment URL, demonstration video, and additional project repository links will be added after publication.
+The portfolio is publicly deployed using GitHub Pages and is designed to continuously evolve as I build new projects, gain experience, and expand my technical skills.
 
 ---
 
-## ✨ What I Improved and Developed
+## ✨ Key Improvements and Contributions
 
-A significant amount of development, customization, testing, and refinement was carried out to create the current version of this portfolio.
-
-### 🎨 UI and Design Improvements
-
-- Redesigned the original portfolio interface with a more modern and professional appearance.
-- Improved the visual hierarchy and presentation of portfolio content.
-- Reworked layouts, spacing, alignment, and component positioning.
-- Customized colors, assets, images, icons, typography, and portfolio branding.
-- Improved the presentation of profile information and professional content.
-- Removed unnecessary content and elements from the original template.
-- Refined the overall visual consistency of the portfolio.
-
-### 📱 Responsive Design Improvements
-
-- Improved responsiveness across mobile, tablet, laptop, and desktop screen sizes.
-- Reworked layouts to better adapt to different screen dimensions.
-- Improved responsive navigation behavior.
-- Refined component sizing, spacing, and positioning across devices.
-- Tested and adjusted the interface for a more consistent web experience.
-
-### 🧭 Navigation and User Experience
-
-- Improved navigation between different portfolio sections.
-- Reorganized the structure of portfolio information.
-- Improved accessibility of important professional information.
-- Improved the presentation of projects, skills, certifications, and achievements.
-- Refined user interaction and overall portfolio usability.
-
-### 👨‍💻 Professional Profile Integration
-
-- Added and customized personal profile information.
-- Added professional summary and career information.
-- Added technical skills and technology information.
-- Integrated professional LinkedIn and GitHub profiles.
-- Added direct access to my CV.
-- Added professional email and contact information.
-- Added customized profile images and personal branding.
-
-### 📂 Project Portfolio Improvements
-
-- Replaced the original project information with my own academic and personal software projects.
-- Added detailed and structured project descriptions.
-- Improved the organization and presentation of project information.
-- Prepared the portfolio for future GitHub repository and live-demo links.
-- Added support for continuously expanding the portfolio with new projects.
-
-### 🧩 Code and Project Structure Improvements
-
-- Modified and improved existing Flutter components.
-- Improved reusable widget implementation where required.
-- Reorganized portfolio data and content.
-- Updated application assets and project resources.
-- Removed unnecessary template-specific content.
-- Improved code readability and maintainability where required.
-- Continuously tested and refined the application during development.
+* Redesigned and modernized the original portfolio interface.
+* Improved responsiveness across mobile, tablet, laptop, and desktop screen sizes.
+* Reworked layouts, spacing, alignment, and component positioning.
+* Improved navigation and organization of portfolio sections.
+* Added personalized professional information, projects, skills, certifications, and achievements.
+* Improved project presentation and portfolio content structure.
+* Customized colors, assets, images, icons, typography, and personal branding.
+* Modified and improved Flutter components and reusable widgets where required.
+* Removed unnecessary template-specific content and functionality.
+* Improved code organization, readability, and maintainability where required.
+* Tested and refined the portfolio across different screen sizes.
+* Prepared the project for continuous updates and future expansion.
 
 ---
 
 ## 📌 Key Features
 
-- 📱 Responsive Flutter Web interface
-- 💻 Desktop, laptop, tablet, and mobile compatibility
-- 🎨 Modernized and customized user interface
-- 👨‍💻 Professional developer profile
-- 📝 Personal and professional introduction
-- 🛠️ Technical skills showcase
-- 📂 Software development project showcase
-- 🎓 Certifications and achievements
-- 📄 Direct CV access
-- 💼 LinkedIn profile integration
-- 💻 GitHub profile integration
-- 📧 Professional contact information
-- 🧭 Improved portfolio navigation
-- 🖼️ Customized assets and personal branding
-- 🧩 Reusable Flutter components
-- 📐 Improved layouts, spacing, and alignment
-- ⚡ Improved responsiveness and user experience
-- 🌐 Ready for Flutter Web deployment
-- 🔄 Designed for future portfolio expansion
+* 📱 Responsive Flutter Web interface
+* 💻 Desktop, laptop, tablet, and mobile compatibility
+* 🎨 Modern and customized user interface
+* 👨‍💻 Professional developer profile and introduction
+* 🛠️ Technical skills showcase
+* 📂 Software development project showcase
+* 🎓 Certifications and achievements
+* 📄 Direct CV access
+* 💼 LinkedIn profile integration
+* 💻 GitHub profile integration
+* 📧 Professional contact information
+* 🧭 Responsive portfolio navigation
+* 🖼️ Customized assets and personal branding
+* 🧩 Reusable Flutter components
+* ⚡ Improved responsiveness and user experience
+* 🌐 Public deployment using GitHub Pages
+* 🔄 Designed for future portfolio expansion
 
 ---
 
 ## 🛠️ Technologies Used
 
-| Technology | Purpose |
-|---|---|
-| Flutter | Cross-platform UI framework |
-| Dart | Application programming language |
-| Flutter Web | Web application development |
-| Material Design | UI components and interface design |
-| Responsive Design | Multi-device layout adaptation |
-| Git | Version control |
-| GitHub | Source code management and project hosting |
+| Technology        | Purpose                            |
+| ----------------- | ---------------------------------- |
+| Flutter           | Cross-platform UI framework        |
+| Dart              | Application programming language   |
+| Flutter Web       | Web application development        |
+| Material Design   | UI components and interface design |
+| Responsive Design | Multi-device layout adaptation     |
+| Git               | Version control and source history |
+| GitHub            | Source code hosting                |
+| GitHub Pages      | Production web deployment          |
 
 ---
 
 ## 📂 Projects Showcased
 
-The portfolio currently presents several academic, personal, mobile application, AI/ML, database, and software development projects.
+The portfolio presents academic, personal, mobile application, AI/ML, database, and software development projects.
 
 ### 🤖 SmartServeAI
 
@@ -154,15 +121,13 @@ The portfolio currently presents several academic, personal, mobile application,
 
 A cross-platform service marketplace developed using Flutter, Firebase, Cloudinary, TensorFlow Lite, and NLP-based AI assistance.
 
-The application includes role-based functionality, real-time marketplace features, service discovery, provider verification, ratings and reviews, professional portfolios, location-based services, and AI-powered assistance.
-
 ### 🧠 AI Face Emotion Detection System
 
 A deep learning-based facial emotion recognition system developed to classify seven human emotions using Python, OpenCV, image preprocessing, model training, and evaluation techniques.
 
 ### 🖼️ Image Compression System
 
-A MATLAB-based image processing project implementing image compression, image optimization, and noise reduction techniques.
+A MATLAB-based image processing project implementing image compression, optimization, and noise reduction techniques.
 
 ### 🏥 Hospital Management System
 
@@ -184,23 +149,13 @@ A command-line Phone Book application developed using Python with functionality 
 
 This responsive developer portfolio built with Flutter Web to showcase my projects, technical skills, certifications, achievements, and professional profile.
 
-> GitHub repository links and live project demonstrations will be added as individual projects are published.
-
 ---
 
 ## 🚀 Live Demo
 
-The portfolio will be deployed after the final development and testing process is completed.
+The portfolio is publicly deployed using GitHub Pages.
 
-**Live Portfolio:** Coming Soon
-
----
-
-## 🎥 Portfolio Demonstration
-
-A complete demonstration video showcasing the responsive design, portfolio sections, navigation, projects, and functionality will be added here.
-
-**Demo Video:** Coming Soon
+🌐 **Live Portfolio:** [View Live Portfolio](https://abdulsamad010.github.io/flutter-web-portfolio-v1/)
 
 ---
 
@@ -240,13 +195,13 @@ flutter run -d chrome
 
 ## 🌐 Build for Web
 
-Generate the production web build:
+Generate the production Flutter Web build for GitHub Pages:
 
 ```bash
-flutter build web
+flutter build web --base-href "/flutter-web-portfolio-v1/"
 ```
 
-The generated web application will be available inside:
+The generated production files are available inside:
 
 ```text
 build/web/
@@ -256,9 +211,26 @@ build/web/
 
 ## 🚀 Deployment
 
-This portfolio is designed to be deployed as a Flutter Web application.
+The portfolio is deployed using **GitHub Pages**.
 
-Deployment information and the production URL will be added after publication.
+🌐 **Production URL:** [View Live Portfolio](https://abdulsamad010.github.io/flutter-web-portfolio-v1/)
+
+The production Flutter Web build is generated locally using:
+
+```bash
+flutter build web --base-href "/flutter-web-portfolio-v1/"
+```
+
+The generated contents of `build/web/` are deployed to the `web-deployment` branch.
+
+The repository uses the following branch structure:
+
+* `main` — contains the Flutter source code, README, project files, and development history.
+* `web-deployment` — contains only the generated Flutter Web production build used by GitHub Pages.
+
+The generated `build/` directory is not committed to the `main` branch.
+
+Deployment is performed manually after generating the production build locally.
 
 ---
 
@@ -266,36 +238,16 @@ Deployment information and the production URL will be added after publication.
 
 Future updates may include:
 
-- 🌐 Adding the live deployed portfolio URL
-- 🎥 Adding a complete portfolio demonstration video
-- 🔗 Adding GitHub repository links for individual projects
-- 🚀 Adding live demonstration links for supported projects
-- 🎬 Further improving animations and transitions
-- ⚡ Improving web performance and asset optimization
-- ♿ Improving accessibility
-- 🔍 Improving SEO and web metadata
-- 📱 Continuing responsive design improvements
-- 📂 Adding new software development projects
-- 🎓 Adding future certifications and achievements
-- 🧩 Continuing code structure and maintainability improvements
-
----
-
-## 👨‍💻 Author
-
-### Abdul Samad
-
-Software Developer | Flutter Developer | AI & Machine Learning Enthusiast
-
-📍 Islamabad, Pakistan
-
-📧 **Email:** [abdulsamadabbasi010@gmail.com](mailto:abdulsamadabbasi010@gmail.com)
-
-💼 **LinkedIn:** [linkedin.com/in/abdulsamad010](https://www.linkedin.com/in/abdulsamad010/)
-
-💻 **GitHub:** [github.com/abdulsamad010](https://github.com/abdulsamad010)
-
-📄 **CV / Resume:** [View My Resume](https://drive.google.com/file/d/1SMjEGVuiRPGjZ21Uuweqye90X8RRXp1x/view?usp=sharing)
+* 🔗 Adding GitHub repository links for individual projects as they are published
+* 🚀 Adding live demonstrations for supported projects
+* 🎬 Further improving animations and transitions
+* ⚡ Improving web performance and asset optimization
+* ♿ Improving accessibility
+* 🔍 Improving SEO and web metadata
+* 📱 Continuing responsive design improvements
+* 📂 Adding new software development projects
+* 🎓 Adding future certifications and achievements
+* 🧩 Continuing code structure and maintainability improvements
 
 ---
 
@@ -308,8 +260,6 @@ The original project served as the starting foundation for this portfolio.
 The current version has been substantially redesigned, modernized, customized, restructured, and improved by **Abdul Samad**.
 
 My contributions include responsive design improvements, user interface redesigns, layout restructuring, navigation improvements, professional profile integration, personalized portfolio sections, project presentation improvements, asset customization, component modifications, content restructuring, testing, refinement, and additional development work.
-
-The current repository represents my customized and improved implementation built upon the original open-source foundation.
 
 Copyright and attribution for portions of the original source code remain with the original copyright holder according to the terms of the MIT License.
 
@@ -333,31 +283,39 @@ See the `LICENSE` file for complete licensing information.
 
 ---
 
+## 👨‍💻 Author
+
+### Abdul Samad
+
+**Software Developer | Flutter Developer | AI & Machine Learning Enthusiast**
+
+📍 Islamabad, Pakistan
+
+📧 **Email:** [abdulsamadabbasi010@gmail.com](mailto:abdulsamadabbasi010@gmail.com)
+
+💼 **LinkedIn:** [linkedin.com/in/abdulsamad010](https://www.linkedin.com/in/abdulsamad010/)
+
+💻 **GitHub:** [github.com/abdulsamad010](https://github.com/abdulsamad010)
+
+🌐 **Portfolio:** [View Live Portfolio](https://abdulsamad010.github.io/flutter-web-portfolio-v1/)
+
+📄 **CV / Resume:** [View My Resume](https://drive.google.com/file/d/1SMjEGVuiRPGjZ21Uuweqye90X8RRXp1x/view?usp=sharing)
+
+---
+
 <div align="center">
 
-## ⭐ Support This Project
+### ⭐ Support This Project
 
-If you like this portfolio, find the project useful, or appreciate the work and improvements made to the original template, please consider giving this repository a **⭐ Star**.
-
-Your support helps increase the visibility of the project and motivates me to continue improving the portfolio and building more open-source software projects.
-
-### 🤝 Let's Connect
-
-I'm always interested in connecting with developers, students, researchers, and technology professionals.
-
-Feel free to connect with me, explore my projects, or reach out for collaboration and software development opportunities.
+If you find this portfolio useful or appreciate the work and improvements made to the original template, consider giving the repository a **⭐ Star**.
 
 <br>
 
-[![LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abdulsamad010/)
+[![View Portfolio](https://img.shields.io/badge/View_Live_Portfolio-02569B?style=for-the-badge\&logo=flutter\&logoColor=white)](https://abdulsamad010.github.io/flutter-web-portfolio-v1/)
 
-[![GitHub](https://img.shields.io/badge/Follow_on_GitHub-181717?logo=github&logoColor=white)](https://github.com/abdulsamad010)
-
-[![Email](https://img.shields.io/badge/Send_Me_an_Email-EA4335?logo=gmail&logoColor=white)](mailto:abdulsamadabbasi010@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/Connect_on_LinkedIn-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white)](https://www.linkedin.com/in/abdulsamad010/)
 
 <br>
-
-### ⭐ If you found this project useful, don't forget to star the repository!
 
 **Made with Flutter 💙 and continuous learning by Abdul Samad**
 
