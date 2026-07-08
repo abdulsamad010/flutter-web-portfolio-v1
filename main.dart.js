@@ -68301,7 +68301,7 @@ $0(){this.a.d=this.b},
 $S:0}
 A.L5.prototype={
 J(a){var s=this,r=null
-return new A.DA(A.GG(!0,A.dQ(A.c([B.jG,new A.Cs(new A.oc("images/abdul_samad.jpeg",r,r),45,r),B.Lw,A.bQ("Abdul Samad",r,r,r,A.ln().$2$fontSize$fontWeight(20,B.a2),r),B.wY,B.y_,B.wX,B.l7,A.EN(B.CQ,s.c,B.QP),A.EN(B.CP,s.d,B.QS),A.EN(B.CG,s.e,B.QQ),A.EN(B.CR,s.f,B.QJ),A.EN(B.lR,s.r,B.xm),B.l7,new A.bP(B.lf,new A.nG(s.w,B.f7,"View CV",!0,r),r)],t.p),B.V,B.B,B.Q),B.az,!0),r)}}
+return new A.DA(A.GG(!0,A.dQ(A.c([B.jG,new A.Cs(new A.oc("assets/images/abdul_samad.jpeg",r,r),45,r),B.Lw,A.bQ("Abdul Samad",r,r,r,A.ln().$2$fontSize$fontWeight(20,B.a2),r),B.wY,B.y_,B.wX,B.l7,A.EN(B.CQ,s.c,B.QP),A.EN(B.CP,s.d,B.QS),A.EN(B.CG,s.e,B.QQ),A.EN(B.CR,s.f,B.QJ),A.EN(B.lR,s.r,B.xm),B.l7,new A.bP(B.lf,new A.nG(s.w,B.f7,"View CV",!0,r),r)],t.p),B.V,B.B,B.Q),B.az,!0),r)}}
 A.yU.prototype={
 J(a){return A.fY(new A.a7T(this))}}
 A.a7T.prototype={
@@ -68330,7 +68330,7 @@ A.aa1.prototype={
 $2(a,b){var s,r=null,q=b.b
 q=q<300?q:300
 s=A.c([new A.c0(0,B.at,A.au(64,B.ct.u()>>>16&255,B.ct.u()>>>8&255,B.ct.u()&255),B.rr,40)],t.V)
-return A.tb(A.ca(r,A.ca(r,new A.CH(new A.uz(A.auA(r,r,new A.oc("images/abdul_samad.jpeg",r,r)),new A.aa0(),1/0,1/0,B.ys,B.a_,r),r),B.q,r,r,B.yq,r,r,r,r,r,r,r,r),B.q,r,r,new A.by(r,r,r,r,s,B.DC,B.bF),r,q,r,r,B.BE,r,r,q),r,r)},
+return A.tb(A.ca(r,A.ca(r,new A.CH(new A.uz(A.auA(r,r,new A.oc("assets/images/abdul_samad.jpeg",r,r)),new A.aa0(),1/0,1/0,B.ys,B.a_,r),r),B.q,r,r,B.yq,r,r,r,r,r,r,r,r),B.q,r,r,new A.by(r,r,r,r,s,B.DC,B.bF),r,q,r,r,B.BE,r,r,q),r,r)},
 $S:444}
 A.aa0.prototype={
 $3(a,b,c){return B.zP},
