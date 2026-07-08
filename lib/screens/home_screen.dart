@@ -6,6 +6,15 @@ import 'package:portfolio/screens/widgets/project_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // =============================================================
+// WHATSAPP CONTACT INFO
+// TODO: Move these into constants.dart alongside contactEmail,
+// linkedInUrl, etc. Update the number to your real WhatsApp
+// number in full international format (digits only after "+").
+// =============================================================
+const String whatsappNumber = "+923499437200";
+const String whatsappDisplay = "+92 349 9437200";
+
+// =============================================================
 // DESIGN TOKENS — MODERN TECH PALETTE
 //
 // Brand gradient runs indigo -> violet -> cyan. Used for primary
@@ -16,6 +25,7 @@ import 'package:url_launcher/url_launcher.dart';
 const Color _cIndigo = Color(0xff4F46E5);
 const Color _cViolet = Color(0xff8B5CF6);
 const Color _cCyan = Color(0xff22D3EE);
+const Color _cWhatsApp = Color(0xff25D366);
 
 const List<Color> _brandGradient = [_cIndigo, _cViolet];
 
@@ -116,6 +126,67 @@ class _GradientButton extends StatelessWidget {
                 Text(
                   label,
                   style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// =============================================================
+// WHATSAPP BUTTON
+// Brand-green CTA button, styled to match _GradientButton but
+// using WhatsApp's signature solid green instead of the site's
+// indigo/violet gradient, so it reads as its own recognizable
+// action wherever it appears.
+// =============================================================
+class _WhatsAppButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final bool expand;
+
+  const _WhatsAppButton({
+    required this.onPressed,
+    this.expand = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: expand ? double.infinity : null,
+      decoration: BoxDecoration(
+        color: _cWhatsApp,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: _cWhatsApp.withOpacity(0.35),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+            child: Row(
+              mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.chat_bubble_outline, size: 18, color: Colors.white),
+                SizedBox(width: 10),
+                Text(
+                  "WhatsApp",
+                  style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
@@ -318,6 +389,48 @@ class _HomeScreenState extends State<HomeScreen> {
           SnackBar(
             content: Text(
               "Could not open email. Contact me at $contactEmail",
+            ),
+          ),
+        );
+      }
+    }
+  }
+
+  // ===========================================================
+  // WHATSAPP
+  // Opens wa.me with a prefilled greeting message. wa.me works
+  // identically on mobile (deep-links into the WhatsApp app) and
+  // on desktop/web (opens WhatsApp Web in a new tab), so there's
+  // no need for platform-specific branching here.
+  // ===========================================================
+  Future<void> openWhatsApp() async {
+    final String phone = whatsappNumber.replaceAll(RegExp(r'[^0-9]'), '');
+    final Uri whatsappUrl = Uri.parse(
+      "https://wa.me/$phone?text=${Uri.encodeComponent("Hi, I saw your portfolio and would like to connect!")}",
+    );
+
+    try {
+      final bool opened = await launchUrl(
+        whatsappUrl,
+        mode: LaunchMode.platformDefault,
+        webOnlyWindowName: "_blank",
+      );
+
+      if (!opened && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Could not open WhatsApp. Contact me at $whatsappDisplay",
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Could not open WhatsApp. Contact me at $whatsappDisplay",
             ),
           ),
         );
@@ -695,6 +808,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       openWebUrl(linkedInUrl);
                                     },
                                     openEmail: openEmail,
+                                    openWhatsApp: openWhatsApp,
                                   ),
                                 ),
                               ],
@@ -710,6 +824,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     openWebUrl(linkedInUrl);
                                   },
                                   openEmail: openEmail,
+                                  openWhatsApp: openWhatsApp,
                                 ),
                               ],
                             ),
@@ -931,6 +1046,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         onPressed: openEmail,
                                         icon: Icons.email_outlined,
                                         label: "Contact Me",
+                                      ),
+                                      _WhatsAppButton(
+                                        onPressed: openWhatsApp,
                                       ),
                                       OutlinedButton.icon(
                                         style: OutlinedButton.styleFrom(
@@ -1542,14 +1660,18 @@ class _InformationTitle extends StatelessWidget {
 
 // =============================================================
 // PROFESSIONAL INFORMATION CARD
+// UPDATE: now takes an `openWhatsApp` callback and shows a
+// WhatsApp row between LinkedIn and Email.
 // =============================================================
 class _ContactInformationCard extends StatelessWidget {
   final VoidCallback openLinkedIn;
   final VoidCallback openEmail;
+  final VoidCallback openWhatsApp;
 
   const _ContactInformationCard({
     required this.openLinkedIn,
     required this.openEmail,
+    required this.openWhatsApp,
   });
 
   @override
@@ -1609,6 +1731,14 @@ class _ContactInformationCard extends StatelessWidget {
               value: linkedInDisplay,
               showExternalIcon: true,
               onTap: openLinkedIn,
+            ),
+
+            _ContactItem(
+              icon: Icons.chat_bubble_outline,
+              title: "WhatsApp",
+              value: whatsappDisplay,
+              showExternalIcon: true,
+              onTap: openWhatsApp,
             ),
 
             _ContactItem(
