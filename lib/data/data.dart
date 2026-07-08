@@ -15,7 +15,7 @@ Color kGradient2 = Colors.pinkAccent;
 // PROFILE IMAGE
 // =============================================================
 
-String imagePath = "images/abdul_samad.jpeg";
+String imagePath = "assets/images/abdul_samad.jpeg";
 
 
 // =============================================================
