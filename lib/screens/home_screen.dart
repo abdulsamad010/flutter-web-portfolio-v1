@@ -5,6 +5,245 @@ import 'package:portfolio/data/data.dart';
 import 'package:portfolio/screens/widgets/project_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// =============================================================
+// DESIGN TOKENS — MODERN TECH PALETTE
+//
+// Brand gradient runs indigo -> violet -> cyan. Used for primary
+// buttons, icon badges, gradient headline text, glowing shadows,
+// and decorative background blobs, so the same signature reads
+// consistently across every section instead of flat single tones.
+// =============================================================
+const Color _cIndigo = Color(0xff4F46E5);
+const Color _cViolet = Color(0xff8B5CF6);
+const Color _cCyan = Color(0xff22D3EE);
+
+const List<Color> _brandGradient = [_cIndigo, _cViolet];
+
+// =============================================================
+// GRADIENT ICON BADGE
+// Replaces flat light-blue icon containers used throughout
+// (About, Contact info, Skills, Certifications) with a glowing
+// gradient badge for a more "tech product" feel.
+// =============================================================
+class _IconBadge extends StatelessWidget {
+  final IconData icon;
+  final double size;
+  final double iconSize;
+
+  const _IconBadge({
+    required this.icon,
+    this.size = 40,
+    this.iconSize = 20,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: _brandGradient,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(size * 0.28),
+        boxShadow: [
+          BoxShadow(
+            color: _cIndigo.withOpacity(0.30),
+            blurRadius: 12,
+            offset: const Offset(0, 5),
+          ),
+        ],
+      ),
+      child: Icon(icon, color: Colors.white, size: iconSize),
+    );
+  }
+}
+
+// =============================================================
+// GRADIENT BUTTON
+// Primary call-to-action button (CV, Contact Me, View Projects)
+// with a brand gradient fill and a soft colored glow, replacing
+// the flat solid-color ElevatedButton look.
+// =============================================================
+class _GradientButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final IconData icon;
+  final String label;
+  final bool expand;
+
+  const _GradientButton({
+    required this.onPressed,
+    required this.icon,
+    required this.label,
+    this.expand = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: expand ? double.infinity : null,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: _brandGradient,
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: _cIndigo.withOpacity(0.35),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+            child: Row(
+              mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, size: 18, color: Colors.white),
+                const SizedBox(width: 10),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// =============================================================
+// GLOW BLOB
+// Soft decorative radial-gradient circle used behind Hero,
+// Skills, and Contact sections to add atmosphere instead of a
+// flat single-color background. Purely decorative: IgnorePointer
+// keeps it out of the hit-test tree, and it never affects layout
+// size since it's only ever placed as a Positioned Stack child.
+// =============================================================
+class _GlowBlob extends StatelessWidget {
+  final Color color;
+  final double size;
+
+  const _GlowBlob({required this.color, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: RadialGradient(
+            colors: [color.withOpacity(0.30), color.withOpacity(0.0)],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// =============================================================
+// STATUS CHIP
+// "Open to Opportunities" pill, reused in Hero + Mobile Drawer,
+// upgraded from a flat light-green fill to a gradient chip with
+// a soft glow so it reads as an active/live status indicator.
+// =============================================================
+class _StatusChip extends StatelessWidget {
+  const _StatusChip();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xff10B981), Color(0xff059669)],
+        ),
+        borderRadius: BorderRadius.circular(50),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xff10B981).withOpacity(0.35),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: const Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.circle, size: 8, color: Colors.white),
+          SizedBox(width: 8),
+          Text(
+            "Open to Opportunities",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 12.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// =============================================================
+// GRADIENT EYEBROW LABEL
+// Small pill used above every section title (ABOUT ME,
+// CERTIFICATIONS, etc.) with gradient text on a tinted
+// background instead of bare flat-colored text.
+// =============================================================
+class _GradientEyebrow extends StatelessWidget {
+  final String text;
+
+  const _GradientEyebrow({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+      decoration: BoxDecoration(
+        color: const Color(0xffEEF2FF),
+        borderRadius: BorderRadius.circular(50),
+        border: Border.all(color: const Color(0xffC7D2FE)),
+      ),
+      child: ShaderMask(
+        shaderCallback: (bounds) => const LinearGradient(
+          colors: [_cIndigo, _cCyan],
+        ).createShader(bounds),
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 12.5,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -224,11 +463,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     width: 11,
                     height: 11,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0xff2563EB), Color(0xff7C3AED)],
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: _brandGradient,
                       ),
                       shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: _cIndigo.withOpacity(0.55),
+                          blurRadius: 8,
+                          spreadRadius: 1,
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -280,26 +526,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: isCompact
-                      ? IconButton(
-                    tooltip: "View CV",
-                    onPressed: openResume,
-                    style: IconButton.styleFrom(
-                      backgroundColor: const Color(0xffEFF6FF),
-                      foregroundColor: const Color(0xff2563EB),
+                      ? Container(
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(colors: _brandGradient),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: _cIndigo.withOpacity(0.30),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    icon: const Icon(
-                      Icons.description_outlined,
-                      size: 20,
+                    child: IconButton(
+                      tooltip: "View CV",
+                      onPressed: openResume,
+                      icon: const Icon(
+                        Icons.description_outlined,
+                        size: 20,
+                        color: Colors.white,
+                      ),
                     ),
                   )
-                      : ElevatedButton.icon(
+                      : _GradientButton(
                     onPressed: openResume,
-                    icon: const Icon(
-                      Icons.description_outlined,
-                      size: 18,
-                      color: Colors.white,
-                    ),
-                    label: const Text("CV", style: TextStyle(color: Colors.white),),
+                    icon: Icons.description_outlined,
+                    label: "CV",
                   ),
                 ),
                 SizedBox(width: isCompact ? 12 : 24),
@@ -322,6 +574,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               key: homeKey,
               width: double.infinity,
+              clipBehavior: Clip.hardEdge,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -333,53 +586,68 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              child: _PageWidth(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final bool row = constraints.maxWidth >= 850;
+              child: Stack(
+                clipBehavior: Clip.hardEdge,
+                children: [
+                  const Positioned(
+                    top: -70,
+                    right: -60,
+                    child: _GlowBlob(color: _cCyan, size: 260),
+                  ),
+                  const Positioned(
+                    bottom: -110,
+                    left: -90,
+                    child: _GlowBlob(color: _cViolet, size: 320),
+                  ),
+                  _PageWidth(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final bool row = constraints.maxWidth >= 850;
 
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: constraints.maxWidth < 600 ? 20 : 40,
-                        vertical: constraints.maxWidth < 600 ? 55 : 90,
-                      ),
-                      child: row
-                          ? Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            flex: 6,
-                            child: _HeroInformation(
-                              openResume: openResume,
-                              openEmail: openEmail,
-                              openProjects: () {
-                                scrollToSection(projectsKey);
-                              },
-                            ),
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: constraints.maxWidth < 600 ? 20 : 40,
+                            vertical: constraints.maxWidth < 600 ? 55 : 90,
                           ),
-                          const SizedBox(width: 60),
-                          const Expanded(
-                            flex: 4,
-                            child: _ProfileImage(),
+                          child: row
+                              ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                flex: 6,
+                                child: _HeroInformation(
+                                  openResume: openResume,
+                                  openEmail: openEmail,
+                                  openProjects: () {
+                                    scrollToSection(projectsKey);
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 60),
+                              const Expanded(
+                                flex: 4,
+                                child: _ProfileImage(),
+                              ),
+                            ],
+                          )
+                              : Column(
+                            children: [
+                              const _ProfileImage(),
+                              const SizedBox(height: 45),
+                              _HeroInformation(
+                                openResume: openResume,
+                                openEmail: openEmail,
+                                openProjects: () {
+                                  scrollToSection(projectsKey);
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      )
-                          : Column(
-                        children: [
-                          const _ProfileImage(),
-                          const SizedBox(height: 45),
-                          _HeroInformation(
-                            openResume: openResume,
-                            openEmail: openEmail,
-                            openProjects: () {
-                              scrollToSection(projectsKey);
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -459,26 +727,36 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               width: double.infinity,
               color: const Color(0xffF8FAFC),
-              child: _PageWidth(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40,
-                    vertical: 90,
+              child: Stack(
+                clipBehavior: Clip.hardEdge,
+                children: [
+                  const Positioned(
+                    top: -60,
+                    right: -80,
+                    child: _GlowBlob(color: _cIndigo, size: 280),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      _SectionHeading(
-                        smallTitle: "TECHNICAL SKILLS",
-                        title: "Technologies I Work With",
-                        description:
-                        "Technologies and tools used across my mobile applications, academic work, and software development projects.",
+                  _PageWidth(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 90,
                       ),
-                      SizedBox(height: 50),
-                      _ResponsiveSkills(),
-                    ],
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          _SectionHeading(
+                            smallTitle: "TECHNICAL SKILLS",
+                            title: "Technologies I Work With",
+                            description:
+                            "Technologies and tools used across my mobile applications, academic work, and software development projects.",
+                          ),
+                          SizedBox(height: 50),
+                          _ResponsiveSkills(),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             // =====================================================
@@ -570,7 +848,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.all(mobile ? 30 : 60),
+                        clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
                             begin: Alignment.topLeft,
@@ -580,64 +858,97 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(24),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.12),
-                              blurRadius: 30,
-                              offset: const Offset(0, 15),
+                              color: _cIndigo.withOpacity(0.25),
+                              blurRadius: 40,
+                              offset: const Offset(0, 20),
                             ),
                           ],
                         ),
-                        child: Column(
+                        child: Stack(
                           children: [
-                            const Icon(
-                              Icons.waving_hand_outlined,
-                              size: 45,
-                              color: Color(0xff60A5FA),
+                            Positioned(
+                              top: -60,
+                              left: -60,
+                              child: _GlowBlob(color: _cCyan, size: 220),
                             ),
-                            const SizedBox(height: 20),
-                            Text(
-                              "Let's Build Something Great",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: mobile ? 27 : 36,
-                                fontWeight: FontWeight.w700,
-                              ),
+                            Positioned(
+                              bottom: -70,
+                              right: -50,
+                              child: _GlowBlob(color: _cViolet, size: 240),
                             ),
-                            const SizedBox(height: 16),
-                            const Text(
-                              "I am open to graduate opportunities, Ai & Flutter development roles, internships, and software development collaborations.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Color(0xffCBD5E1),
-                                fontSize: 16,
-                                height: 1.7,
-                              ),
-                            ),
-                            const SizedBox(height: 30),
-                            Wrap(
-                              alignment: WrapAlignment.center,
-                              spacing: 12,
-                              runSpacing: 12,
-                              children: [
-                                ElevatedButton.icon(
-                                  onPressed: openEmail,
-                                  icon: const Icon(Icons.email_outlined),
-                                  label: const Text("Contact Me", style: TextStyle(color: Colors.white),),
-                                ),
-                                OutlinedButton.icon(
-                                  style: OutlinedButton.styleFrom(
-                                    foregroundColor: Colors.white,
-                                    side: const BorderSide(
-                                      color: Color(0xff475569),
+                            Padding(
+                              padding: EdgeInsets.all(mobile ? 30 : 60),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(18),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: const LinearGradient(
+                                        colors: [_cIndigo, _cCyan],
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: _cCyan.withOpacity(0.35),
+                                          blurRadius: 24,
+                                          offset: const Offset(0, 8),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.waving_hand_outlined,
+                                      size: 34,
+                                      color: Colors.white,
                                     ),
                                   ),
-                                  onPressed: openResume,
-                                  icon: const Icon(
-                                    Icons.description_outlined,
+                                  const SizedBox(height: 24),
+                                  Text(
+                                    "Let's Build Something Great",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: mobile ? 27 : 36,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
-                                  label: const Text("View CV"),
-                                ),
-                              ],
+                                  const SizedBox(height: 16),
+                                  const Text(
+                                    "I am open to graduate opportunities, Ai & Flutter development roles, internships, and software development collaborations.",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xffCBD5E1),
+                                      fontSize: 16,
+                                      height: 1.7,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 30),
+                                  Wrap(
+                                    alignment: WrapAlignment.center,
+                                    spacing: 12,
+                                    runSpacing: 12,
+                                    children: [
+                                      _GradientButton(
+                                        onPressed: openEmail,
+                                        icon: Icons.email_outlined,
+                                        label: "Contact Me",
+                                      ),
+                                      OutlinedButton.icon(
+                                        style: OutlinedButton.styleFrom(
+                                          foregroundColor: Colors.white,
+                                          side: const BorderSide(
+                                            color: Color(0xff475569),
+                                          ),
+                                        ),
+                                        onPressed: openResume,
+                                        icon: const Icon(
+                                          Icons.description_outlined,
+                                        ),
+                                        label: const Text("View CV"),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -660,6 +971,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Column(
                 children: [
+                  Container(
+                    width: 48,
+                    height: 4,
+                    margin: const EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(colors: _brandGradient),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
                   Text(
                     name,
                     textAlign: TextAlign.center,
@@ -752,13 +1072,13 @@ class _NavigationButtonState extends State<_NavigationButton> {
           vertical: 10,
         ),
         decoration: BoxDecoration(
-          color: hovered ? const Color(0xffEFF6FF) : Colors.transparent,
+          color: hovered ? const Color(0xffEEF2FF) : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Text(
           widget.title,
           style: TextStyle(
-            color: hovered ? const Color(0xff2563EB) : const Color(0xff475569),
+            color: hovered ? _cIndigo : const Color(0xff475569),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -812,24 +1132,7 @@ class _MobileDrawer extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 4,
-              ),
-              decoration: BoxDecoration(
-                color: const Color(0xffDCFCE7),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Text(
-                "Open to Opportunities",
-                style: TextStyle(
-                  color: Color(0xff166534),
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12,
-                ),
-              ),
-            ),
+            const _StatusChip(),
 
             const SizedBox(height: 25),
 
@@ -871,16 +1174,11 @@ class _MobileDrawer extends StatelessWidget {
             Padding(
               padding:
               const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                width: double.infinity,
-                child: ElevatedButton.icon(
-                  onPressed: onResumePressed,
-                  icon: const Icon(
-                    Icons.description_outlined,
-                    size: 18,
-                  ),
-                  label: const Text("View CV",style: TextStyle(color: Colors.white),),
-                ),
+              child: _GradientButton(
+                onPressed: onResumePressed,
+                icon: Icons.description_outlined,
+                label: "View CV",
+                expand: true,
               ),
             ),
           ],
@@ -914,29 +1212,22 @@ class _HeroInformation extends StatelessWidget {
           crossAxisAlignment:
           centered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xffDCFCE7),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Text(
-                "●  Open to Opportunities",
-                style: TextStyle(
-                  color: Color(0xff166534),
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+            const _StatusChip(),
             const SizedBox(height: 25),
-            Text(
-              "Hi, I'm $name",
-              textAlign: centered ? TextAlign.center : TextAlign.left,
-              style: GoogleFonts.poppins(
-                fontSize: centered ? 34 : 54,
-                height: 1.15,
-                fontWeight: FontWeight.w800,
-                color: const Color(0xff0F172A),
+            ShaderMask(
+              shaderCallback: (bounds) => const LinearGradient(
+                colors: [Color(0xff0F172A), _cIndigo, _cViolet],
+                stops: [0.0, 0.55, 1.0],
+              ).createShader(bounds),
+              child: Text(
+                "Hi, I'm $name",
+                textAlign: centered ? TextAlign.center : TextAlign.left,
+                style: GoogleFonts.poppins(
+                  fontSize: centered ? 34 : 54,
+                  height: 1.15,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 18),
@@ -944,7 +1235,7 @@ class _HeroInformation extends StatelessWidget {
               "Computer Science Graduate • Flutter & Ai Developer",
               textAlign: centered ? TextAlign.center : TextAlign.left,
               style: GoogleFonts.montserrat(
-                color: const Color(0xff2563EB),
+                color: _cIndigo,
                 fontSize: centered ? 20 : 26,
                 fontWeight: FontWeight.w700,
               ),
@@ -990,18 +1281,26 @@ class _HeroInformation extends StatelessWidget {
               alignment:
               centered ? WrapAlignment.center : WrapAlignment.start,
               children: [
-                ElevatedButton.icon(
+                _GradientButton(
                   onPressed: openProjects,
-                  icon: const Icon(Icons.work_outline),
-                  label: const Text("View Projects", style: TextStyle(color: Colors.white),),
+                  icon: Icons.work_outline,
+                  label: "View Projects",
                 ),
                 OutlinedButton.icon(
                   onPressed: openResume,
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: _cIndigo,
+                    side: const BorderSide(color: _cIndigo, width: 1.4),
+                  ),
                   icon: const Icon(Icons.description_outlined),
                   label: const Text("View CV"),
                 ),
                 OutlinedButton.icon(
                   onPressed: openEmail,
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: _cIndigo,
+                    side: const BorderSide(color: _cIndigo, width: 1.4),
+                  ),
                   icon: const Icon(Icons.email_outlined),
                   label: const Text("Contact"),
                 ),
@@ -1027,12 +1326,12 @@ class _QuickFact extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(50),
-        border: Border.all(color: const Color(0xffE2E8F0)),
+        border: Border.all(color: const Color(0xffC7D2FE)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: const Color(0xff2563EB)),
+          Icon(icon, size: 16, color: _cIndigo),
           const SizedBox(width: 6),
           Text(
             label,
@@ -1139,16 +1438,8 @@ class _SectionHeading extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              smallTitle,
-              style: const TextStyle(
-                color: Color(0xff2563EB),
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.5,
-              ),
-            ),
-            const SizedBox(height: 10),
+            _GradientEyebrow(text: smallTitle),
+            const SizedBox(height: 14),
             Text(
               title,
               style: GoogleFonts.poppins(
@@ -1232,14 +1523,7 @@ class _InformationTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: const Color(0xffEFF6FF),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Icon(icon, color: const Color(0xff2563EB)),
-        ),
+        _IconBadge(icon: icon, size: 40, iconSize: 20),
         const SizedBox(width: 12),
         Expanded(
           child: Text(
@@ -1270,53 +1554,73 @@ class _ContactInformationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Signature card for this section: a subtle brand-gradient
+    // border (built from two nested containers, since Flutter
+    // has no native gradient-border property) makes this the one
+    // "boldest" card on the page, while every other card keeps a
+    // quieter, single-tone border.
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(28),
       decoration: BoxDecoration(
-        color: const Color(0xffF8FAFC),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: const Color(0xffE2E8F0),
+        gradient: const LinearGradient(
+          colors: [_cIndigo, _cCyan],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Professional Information",
-            style: GoogleFonts.poppins(
-              color: const Color(0xff0F172A),
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-
-          const SizedBox(height: 28),
-
-          _ContactItem(
-            icon: Icons.location_on_outlined,
-            title: "Location",
-            value: location,
-          ),
-
-          _ContactItem(
-            icon: Icons.link,
-            title: "LinkedIn",
-            value: linkedInDisplay,
-            showExternalIcon: true,
-            onTap: openLinkedIn,
-          ),
-
-          _ContactItem(
-            icon: Icons.email_outlined,
-            title: "Email",
-            value: emailDisplay,
-            showExternalIcon: true,
-            onTap: openEmail,
-            last: true,
+        borderRadius: BorderRadius.circular(21),
+        boxShadow: [
+          BoxShadow(
+            color: _cIndigo.withOpacity(0.18),
+            blurRadius: 24,
+            offset: const Offset(0, 12),
           ),
         ],
+      ),
+      padding: const EdgeInsets.all(1.5),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(28),
+        decoration: BoxDecoration(
+          color: const Color(0xffF8FAFC),
+          borderRadius: BorderRadius.circular(19.5),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Professional Information",
+              style: GoogleFonts.poppins(
+                color: const Color(0xff0F172A),
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+            const SizedBox(height: 28),
+
+            _ContactItem(
+              icon: Icons.location_on_outlined,
+              title: "Location",
+              value: location,
+            ),
+
+            _ContactItem(
+              icon: Icons.link,
+              title: "LinkedIn",
+              value: linkedInDisplay,
+              showExternalIcon: true,
+              onTap: openLinkedIn,
+            ),
+
+            _ContactItem(
+              icon: Icons.email_outlined,
+              title: "Email",
+              value: emailDisplay,
+              showExternalIcon: true,
+              onTap: openEmail,
+              last: true,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1370,20 +1674,7 @@ class _ContactItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
 
               children: [
-                Container(
-                  padding: const EdgeInsets.all(9),
-
-                  decoration: BoxDecoration(
-                    color: const Color(0xffEFF6FF),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-
-                  child: Icon(
-                    icon,
-                    color: const Color(0xff2563EB),
-                    size: 20,
-                  ),
-                ),
+                _IconBadge(icon: icon, size: 38, iconSize: 18),
 
                 const SizedBox(width: 12),
 
@@ -1414,7 +1705,7 @@ class _ContactItem extends StatelessWidget {
 
                               style: TextStyle(
                                 color: onTap != null
-                                    ? const Color(0xff2563EB)
+                                    ? _cIndigo
                                     : const Color(0xff0F172A),
 
                                 fontSize: 15,
@@ -1531,16 +1822,25 @@ class _SkillCardState extends State<_SkillCard> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 26),
         decoration: BoxDecoration(
-          color: hovered ? const Color(0xffEFF6FF) : Colors.white,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: hovered ? const Color(0xff93C5FD) : const Color(0xffE2E8F0),
+            color: hovered ? _cIndigo.withOpacity(0.4) : const Color(0xffE2E8F0),
           ),
+          boxShadow: hovered
+              ? [
+            BoxShadow(
+              color: _cIndigo.withOpacity(0.18),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
+          ]
+              : [],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(widget.icon, color: const Color(0xff2563EB), size: 34),
+            _IconBadge(icon: widget.icon, size: 56, iconSize: 28),
             const SizedBox(height: 14),
             Text(
               widget.title,
@@ -1570,6 +1870,7 @@ class _ResponsiveCertifications extends StatelessWidget {
         title: "Google Prompting Essentials Specialization",
         issuer: "Google",
         completedDate: "August 2025",
+        link: "https://coursera.org/share/dcdaf428205599c559ebbc5c8a5b6bd6",
         description:
         "Completed a multi-course specialization focused on effective prompting and practical generative AI applications.\n\n"
             "Included Courses:\n"
@@ -1585,6 +1886,7 @@ class _ResponsiveCertifications extends StatelessWidget {
         "Google IT Automation with Python Professional Certificate",
         issuer: "Google",
         completedDate: "June 2025",
+        link: "https://coursera.org/share/2a87c3ab9fc13afb59efbd6e4ef1113e",
         description:
         "Completed a multi-course professional certificate focused on Python automation, version control, troubleshooting, configuration management, and cloud technologies.\n\n"
             "Included Courses:\n"
@@ -1600,7 +1902,7 @@ class _ResponsiveCertifications extends StatelessWidget {
         title:
         "Flutter and Dart: Developing iOS, Android, and Mobile Apps",
         issuer: "IBM",
-        //link:"https://coursera.org/share/4c10ad295ce4d5c45e1bbe9c08aaa1cb",
+        link: "https://coursera.org/share/4c10ad295ce4d5c45e1bbe9c08aaa1cb",
         completedDate: "July 2026",
         description:
         "Covered Flutter and Dart fundamentals, responsive UI development, application architecture, and cross-platform mobile app development.",
@@ -1610,7 +1912,7 @@ class _ResponsiveCertifications extends StatelessWidget {
       _CertificationData(
         title: "The Nuts and Bolts of Machine Learning",
         issuer: "Google",
-        //link:"https://coursera.org/share/bb5a86713e4377bba5f356eda6054d7b",
+        link: "https://coursera.org/share/bb5a86713e4377bba5f356eda6054d7b",
         completedDate: "September 2025",
         description:
         "Developed practical knowledge of machine learning models, model evaluation, feature engineering, and supervised learning techniques.",
@@ -1620,7 +1922,7 @@ class _ResponsiveCertifications extends StatelessWidget {
       _CertificationData(
         title: "Foundations of Project Management",
         issuer: "Google",
-        //link:"https://coursera.org/share/d036cf46af5636920aaf8ae402ff253f",
+        link: "https://coursera.org/share/d036cf46af5636920aaf8ae402ff253f",
         completedDate: "September 2025",
         description:
         "Covered project management fundamentals, project life cycles, organizational structures, stakeholder management, and effective project planning.",
@@ -1628,19 +1930,9 @@ class _ResponsiveCertifications extends StatelessWidget {
       ),
 
       _CertificationData(
-        title: "Google Prompting Essentials Specialization",
-        issuer: "Google",
-        //link:"https://coursera.org/share/dcdaf428205599c559ebbc5c8a5b6bd6",
-        completedDate: "August 2025",
-        description:
-        "Completed a multi-course specialization focused on effective prompt design, generative AI collaboration, data analysis, content creation, and practical workplace applications.",
-        icon: Icons.auto_awesome_outlined,
-      ),
-
-      _CertificationData(
         title: "What is Data Science?",
         issuer: "IBM",
-        //link:"https://coursera.org/share/ebdfca900192401fa5cdb054dd49ffa1",
+        link: "https://coursera.org/share/ebdfca900192401fa5cdb054dd49ffa1",
         completedDate: "August 2025",
         description:
         "Introduced data science concepts, the work of data scientists, common tools, methodologies, and real-world applications of data-driven problem solving.",
@@ -1648,20 +1940,9 @@ class _ResponsiveCertifications extends StatelessWidget {
       ),
 
       _CertificationData(
-        title:
-        "Google IT Automation with Python Professional Certificate",
-        issuer: "Google",
-        //link:"https://coursera.org/share/2a87c3ab9fc13afb59efbd6e4ef1113e",
-        completedDate: "June 2025",
-        description:
-        "Completed a multi-course professional certificate covering Python automation, Git and GitHub, debugging, operating system interaction, configuration management, and cloud technologies.",
-        icon: Icons.terminal_outlined,
-      ),
-
-      _CertificationData(
         title: "Work Smarter with Microsoft Excel",
         issuer: "Microsoft",
-        //link:"https://coursera.org/share/4fad63c7301da7e70dc7a8214407e35b",
+        link: "https://coursera.org/share/4fad63c7301da7e70dc7a8214407e35b",
         completedDate: "May 2025",
         description:
         "Developed practical skills in spreadsheet management, formulas, data organization, analysis, and productivity workflows using Microsoft Excel.",
@@ -1671,7 +1952,7 @@ class _ResponsiveCertifications extends StatelessWidget {
       _CertificationData(
         title: "AI For Everyone",
         issuer: "DeepLearning.AI",
-        //link:"https://coursera.org/share/e07599e48cb67b724dd4aecfc41bf01e",
+        link: "https://coursera.org/share/e07599e48cb67b724dd4aecfc41bf01e",
         completedDate: "April 2025",
         description:
         "Covered artificial intelligence fundamentals, AI project workflows, organizational adoption of AI, and the opportunities and limitations of AI technologies.",
@@ -1681,7 +1962,7 @@ class _ResponsiveCertifications extends StatelessWidget {
       _CertificationData(
         title: "Python for Beginners",
         issuer: "Atomcamp",
-        //link:"https://drive.google.com/file/d/128H4GHXsT2gqg5N9P4Gwo9ZrfoIxrPoY/view?pli=1",
+        link: "https://drive.google.com/file/d/128H4GHXsT2gqg5N9P4Gwo9ZrfoIxrPoY/view?pli=1",
         completedDate: "",
         description:
         "Covered Python programming fundamentals, variables, data types, control flow, functions, collections, and introductory problem-solving techniques.",
@@ -1691,7 +1972,7 @@ class _ResponsiveCertifications extends StatelessWidget {
       _CertificationData(
         title: "Introduction to Cybersecurity Awareness",
         issuer: "HP LIFE",
-        //link:"https://www.life-global.org/certificate/77a8c2c7-eab0-4b51-9574-ac3b551cb1eb",
+        link: "https://www.life-global.org/certificate/77a8c2c7-eab0-4b51-9574-ac3b551cb1eb",
         completedDate: "",
         description:
         "Covered cybersecurity fundamentals, common digital threats, safe online practices, data protection, and security awareness for individuals and organizations.",
@@ -1701,7 +1982,7 @@ class _ResponsiveCertifications extends StatelessWidget {
       _CertificationData(
         title: "Artificial Intelligence Fundamentals",
         issuer: "Great Learning",
-        //link:"https://www.mygreatlearning.com/certificate/LULFUXFH",
+        link: "https://www.mygreatlearning.com/certificate/LULFUXFH",
         completedDate: "",
         description:
         "Introduced core artificial intelligence concepts, machine learning fundamentals, AI applications, and the role of intelligent systems in solving real-world problems.",
@@ -1740,6 +2021,7 @@ class _ResponsiveCertifications extends StatelessWidget {
                 issuer: certification.issuer,
                 description: certification.description,
                 icon: certification.icon,
+                link: certification.link,
               ),
             );
           }).toList(),
@@ -1758,20 +2040,26 @@ class _CertificationData {
   final String title;
   final String issuer;
   final String description;
+  final String link;
   final IconData icon;
 
   const _CertificationData({
     required this.title,
     required this.issuer,
     required this.description,
+    required this.link,
     required this.icon,
     required completedDate,
   });
 }
 
-
 // =============================================================
 // CERTIFICATION CARD
+//
+// UPDATE: cards are now clickable when a `link` is supplied -
+// tapping opens the certificate in the browser. A small
+// "View Certificate" row with an external-link icon is shown
+// at the bottom of the card so it's clear it's tappable.
 // =============================================================
 
 class _CertificationCard extends StatefulWidget {
@@ -1779,12 +2067,14 @@ class _CertificationCard extends StatefulWidget {
   final String issuer;
   final String description;
   final IconData icon;
+  final String link;
 
   const _CertificationCard({
     required this.title,
     required this.issuer,
     required this.description,
     required this.icon,
+    required this.link,
   });
 
   @override
@@ -1797,8 +2087,46 @@ class _CertificationCardState
     extends State<_CertificationCard> {
   bool hovered = false;
 
+  Future<void> _openCertificateLink() async {
+    if (widget.link.isEmpty) {
+      return;
+    }
+
+    final Uri? url = Uri.tryParse(widget.link);
+
+    if (url == null) {
+      return;
+    }
+
+    try {
+      final bool opened = await launchUrl(
+        url,
+        mode: LaunchMode.platformDefault,
+        webOnlyWindowName: "_blank",
+      );
+
+      if (!opened && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Could not open the certificate link."),
+          ),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Could not open the certificate link."),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool hasLink = widget.link.isNotEmpty;
+
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -1821,8 +2149,6 @@ class _CertificationCardState
 
         width: double.infinity,
 
-        padding: const EdgeInsets.all(24),
-
         decoration: BoxDecoration(
           color: Colors.white,
 
@@ -1836,75 +2162,97 @@ class _CertificationCardState
 
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(
-                hovered ? 0.10 : 0.03,
-              ),
-              blurRadius: hovered ? 24 : 8,
+              color: hovered
+                  ? _cIndigo.withOpacity(0.16)
+                  : Colors.black.withOpacity(0.03),
+              blurRadius: hovered ? 26 : 8,
               offset: const Offset(0, 8),
             ),
           ],
         ),
 
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xffEFF6FF),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Icon(
-                    widget.icon,
-                    color: const Color(0xff2563EB),
-                    size: 22,
-                  ),
-                ),
+        child: Material(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: hasLink ? _openCertificateLink : null,
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _IconBadge(icon: widget.icon, size: 44, iconSize: 22),
 
-                const SizedBox(width: 14),
+                      const SizedBox(width: 14),
 
-                Expanded(
-                  child: Text(
-                    widget.title,
-                    softWrap: true,
-                    style: GoogleFonts.poppins(
-                      color: const Color(0xff0F172A),
-                      fontSize: 19,
-                      height: 1.3,
+                      Expanded(
+                        child: Text(
+                          widget.title,
+                          softWrap: true,
+                          style: GoogleFonts.poppins(
+                            color: const Color(0xff0F172A),
+                            fontSize: 19,
+                            height: 1.3,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 18),
+
+                  Text(
+                    widget.issuer,
+                    style: const TextStyle(
+                      color: _cIndigo,
+                      fontSize: 13,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                ),
-              ],
-            ),
 
-            const SizedBox(height: 18),
+                  const SizedBox(height: 12),
 
-            Text(
-              widget.issuer,
-              style: const TextStyle(
-                color: Color(0xff2563EB),
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
+                  Text(
+                    widget.description,
+                    softWrap: true,
+                    style: const TextStyle(
+                      color: Color(0xff475569),
+                      fontSize: 14.5,
+                      height: 1.6,
+                    ),
+                  ),
+
+                  if (hasLink) ...[
+                    const SizedBox(height: 18),
+                    Row(
+                      children: const [
+                        Text(
+                          "View Certificate",
+                          style: TextStyle(
+                            color: _cIndigo,
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(width: 6),
+                        Icon(
+                          Icons.open_in_new,
+                          size: 15,
+                          color: _cIndigo,
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
               ),
             ),
-
-            const SizedBox(height: 12),
-
-            Text(
-              widget.description,
-              softWrap: true,
-              style: const TextStyle(
-                color: Color(0xff475569),
-                fontSize: 14.5,
-                height: 1.6,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
